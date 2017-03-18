@@ -1,0 +1,36 @@
+<IfModule mod_rewrite.c>
+
+    RewriteEngine on
+    RewriteCond $1 !^(index\.php|uploads|assets|api|patch|application|plugins|images|css|js|fonts|timthumb\.php|upload\.php|googleb1a4e0a89ff5712d\.html)
+    RewriteRule ^(.*)$ index.php/$1 [L]
+
+    Satisfy any
+    order mutual-failure
+    allow from all
+
+    <IfModule mod_headers.c>
+       Header set Access-Control-Allow-Origin "*"
+     </IfModule>
+
+    AddType audio/mpeg mp3
+    AddType audio/mp4 m4a
+    AddType audio/ogg ogg
+    AddType audio/ogg oga
+    AddType audio/webm webma
+    AddType audio/wav wav
+
+    AddType video/mp4 mp4
+    AddType video/mp4 m4v
+    AddType video/ogg ogv
+    AddType video/webm webm
+    AddType video/webm webmv
+
+
+
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    # If we don't have mod_rewrite installed, all 404's
+    # can be sent to index.php, and everything works as normal.
+    ErrorDocument 404 /index.php
+</IfModule>
